@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+data:
+  init-script.sh: |
+    $!/bin/bash
+
+    sed -i 's/host all all all scram-sha-256/host all all all trust/g' /var/lib/postgresql/data/pg_hba.conf
+    sed -i 's/if \! _is_sourced/if _is_sourced/g' /usr/local/bin/docker-entrypoint.sh
+
+    /usr/local/bin/docker-entrypoint.sh

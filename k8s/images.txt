@@ -1,0 +1,4 @@
+    image: 'rallycoding/multi-client'
+    image: 'rallycoding/multi-server'
+    image: 'rallycoding/multi-worker'
+    image: 'rallycoding/multi-nginx'
