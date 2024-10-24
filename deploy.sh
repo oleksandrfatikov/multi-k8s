@@ -1,3 +1,4 @@
+#test
 docker build -t portasanych/multi-client -t portasanych/multi-client:$SHA -f ./client/Dockerfile ./client
 docker build -t portasanych/multi-server -t portasanych/multi-server:$SHA -f ./server/Dockerfile ./server
 docker build -t portasanych/multi-worker -t portasanych/multi-worker:$SHA -f ./worker/Dockerfile ./worker
