@@ -35,7 +35,14 @@ class Fib extends Component {
   };
 
   renderSeenIndexes() {
-    return this.state.seenIndexes.map(({ number }) => number).join(', ');
+    if (this.state.seenIndexes instanceof Array)
+    {
+      return this.state.seenIndexes.map(({ number }) => number).join(', ');
+    }
+    else
+    {
+      return "";
+    }
   }
 
   renderValues() {
@@ -65,7 +72,7 @@ class Fib extends Component {
         </form>
 
         <h3>Indexes I have seen:</h3>
-        { if (Array.isArray(this.state.seenIndexes))  this.renderSeenIndexes() }
+        {  this.renderSeenIndexes() }
 
         <h3>Calculated Values:</h3>
         {this.renderValues()}
