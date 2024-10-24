@@ -14,7 +14,7 @@ before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t portasanych/react-test -f ./client/Dockerfile.dev ./client
 script:
-  - CI=true docker run portasanych/react-test npm test -- --coverage
+  - docker run -e CI=true portasanych/react-test npm test -- --coverage
 
 deploy:
   provider: script
