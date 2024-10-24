@@ -1,0 +1,23 @@
+sudo: required
+service:
+  - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+  - openssl aes-256-cbc -K $encrypted_ad2639faab24_key -iv $encrypted_ad2639faab24_iv -in rackspace_dev.enc -out ./rackspace_dev -d
+  - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  - sudo mv kubectl /usr/bin/
+  - sudo chmod 777 /usr/bin/kubectl
+  - mkdir ~/.kube/ && cp rackspace_dev ~/.kube && chmod 400 ~/.kube/config
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t portasanych/react-test -f ./client/Docker.dev ./client
+script:
+  - docker run portasanych/react-test npm test 
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: main
