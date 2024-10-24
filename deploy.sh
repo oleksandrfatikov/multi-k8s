@@ -10,7 +10,7 @@ docker push portasanych/multi-server:$SHA
 docker push portasanych/multi-worker
 docker push portasanych/multi-worker:$SHA
 
-kubectl apply -f k8s
+kubectl apply -n udemy-course -f k8s
 kubectl set image deployments/server-deployment -n udemy-course server=portasanych/multi-server:$SHA
 kubectl set image deployments/client-deployment -n udemy-course client=portasanych/multi-client:$SHA
 kubectl set image deployments/worker-deployment -n udemy-course worker=portasanych/multi-worker:$SHA
